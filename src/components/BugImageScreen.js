@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet, Button, Image} from 'react-native';
-import {withNavigation} from 'react-navigation';
+import {withNavigation} from '@react-navigation/native';
 
 // Import all bug images statically
 const bugImages = [

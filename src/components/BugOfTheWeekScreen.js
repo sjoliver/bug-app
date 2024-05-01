@@ -1,15 +1,15 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
-import { withNavigation } from 'react-navigation';
+import {View, Text, StyleSheet, Button} from 'react-native';
+import {withNavigation} from '@react-navigation/native';
 
-
-const BugOfTheWeek = ({ navigation }) => {
-
+const BugOfTheWeek = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.welcomeText}>Your Bug of the week is...</Text>
-      <Button title="Let's see that bug" onPress={() =>
-        navigation.navigate('BugImage')} />
+      <Button
+        title="Let's see that bug"
+        onPress={() => navigation.navigate('BugImage')}
+      />
     </View>
   );
 };
@@ -28,4 +28,3 @@ const styles = StyleSheet.create({
 });
 
 export default withNavigation(BugOfTheWeek);
-

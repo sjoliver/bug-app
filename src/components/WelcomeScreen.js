@@ -1,15 +1,16 @@
-import {withNavigation} from '@react-navigation/native';
 import React from 'react';
 import {View, Text, StyleSheet, Button} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
-const WelcomeScreen = ({navigation}) => {
+const WelcomeScreen = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <Text style={styles.welcomeText}>Welcome to Bug :)</Text>
-
       <Button
         title="Start Catching Bugs"
-        onPress={() => navigation.navigate('BugOfTheWeek')}
+        onPress={() => navigation.navigate('BugOfTheWeekScreen')}
       />
     </View>
   );
@@ -28,4 +29,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withNavigation(WelcomeScreen);
+export default WelcomeScreen;

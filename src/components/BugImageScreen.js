@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet, Button, Image} from 'react-native';
-import {withNavigation} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 
 // Import all bug images statically
 const bugImages = [
@@ -16,7 +16,8 @@ const bugImages = [
   require('../../assets/bugs/bug_10.png'),
 ];
 
-const BugImageScreen = ({navigation}) => {
+const BugImageScreen = () => {
+  const navigation = useNavigation();
   const [randomBugNumber, setRandomBugNumber] = useState(null);
 
   useEffect(() => {
@@ -34,16 +35,14 @@ const BugImageScreen = ({navigation}) => {
     return null; // You can set this to a default image or leave it null
   };
 
-  // Function to handle navigation to the BugCounter screen
-  const goToBugCounterScreen = () => {
-    navigation.navigate('BugCounter', {bugImage: getBugImage()});
-  };
-
   return (
     <View style={styles.container}>
       <Text style={styles.welcomeText}>Your Bug of the week is...</Text>
       {randomBugNumber && <Image source={getBugImage()} style={styles.image} />}
-      <Button title="Bug Count" onPress={goToBugCounterScreen} />
+      <Button
+        title="Bug Count"
+        onPress={() => navigation.navigate('BugCounterScreen')}
+      />
     </View>
   );
 };
@@ -66,4 +65,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withNavigation(BugImageScreen);
+export default BugImageScreen;

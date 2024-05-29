@@ -4,15 +4,17 @@ import {View, Text, StyleSheet, Image, Button} from 'react-native';
 const BugInteractionScreen = ({route, navigation}) => {
   const {bugImage} = route.params;
 
-  // Assume you have a state variable to hold the bug count
-  const bugCount = 5; // This is just an example, you can replace it with your actual bug count
+  const bugCount = 5;
 
   return (
     <View style={styles.container}>
       <Text style={styles.welcomeText}>Your Bug of the week is...</Text>
       <Image source={bugImage} style={styles.image} />
       <Text style={styles.count}>Total Bugs Caught: {bugCount}</Text>
-      <Button title="Spread Bug" onPress={() => navigation.navigate('')} />
+      <Button
+        title="Spread my bug"
+        onPress={() => navigation.navigate('BugInteractionScreen')}
+      />
     </View>
   );
 };
@@ -20,7 +22,7 @@ const BugInteractionScreen = ({route, navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     alignItems: 'center',
   },
   welcomeText: {

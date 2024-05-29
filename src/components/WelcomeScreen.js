@@ -1,16 +1,13 @@
 import React from 'react';
 import {View, Text, StyleSheet, Button} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
 
-const WelcomeScreen = () => {
-  const navigation = useNavigation();
-
+const WelcomeScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.welcomeText}>Welcome to Bug :)</Text>
       <Button
         title="Start Catching Bugs"
-        onPress={() => navigation.navigate('BugOfTheWeekScreen')}
+        onPress={() => navigation.navigate('BugOfTheWeek')}
       />
     </View>
   );

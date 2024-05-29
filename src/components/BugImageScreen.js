@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet, Button, Image} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
 
 // Import all bug images statically
 const bugImages = [
@@ -16,8 +15,7 @@ const bugImages = [
   require('../../assets/bugs/bug_10.png'),
 ];
 
-const BugImageScreen = () => {
-  const navigation = useNavigation();
+const BugImageScreen = ({navigation}) => {
   const [randomBugNumber, setRandomBugNumber] = useState(null);
 
   useEffect(() => {
@@ -41,7 +39,7 @@ const BugImageScreen = () => {
       {randomBugNumber && <Image source={getBugImage()} style={styles.image} />}
       <Button
         title="Bug Count"
-        onPress={() => navigation.navigate('BugCounterScreen')}
+        onPress={() => navigation.navigate('BugCounter')}
       />
     </View>
   );

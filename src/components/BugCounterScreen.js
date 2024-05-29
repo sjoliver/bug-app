@@ -1,13 +1,10 @@
 import React from 'react';
 import {View, Text, StyleSheet, Image, Button} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
 
-const BugCounterScreen = ({route}) => {
-  const navigation = useNavigation();
+const BugCounterScreen = ({route, navigation}) => {
   const {bugImage} = route.params;
 
-  // Assume you have a state variable to hold the bug count
-  const bugCount = 5; // This is just an example, you can replace it with your actual bug count
+  const bugCount = 5;
 
   return (
     <View style={styles.container}>
@@ -16,7 +13,7 @@ const BugCounterScreen = ({route}) => {
       <Text style={styles.count}>Total Bugs Caught: {bugCount}</Text>
       <Button
         title="Spread Bug"
-        onPress={() => navigation.navigate('BugInteractionScreen')}
+        onPress={() => navigation.navigate('BugInteraction')}
       />
     </View>
   );

@@ -1,9 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet, Image, Button} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
 
-const BugInteractionScreen = ({route}) => {
-  const navigation = useNavigation();
+const BugInteractionScreen = ({route, navigation}) => {
   const {bugImage} = route.params;
 
   // Assume you have a state variable to hold the bug count

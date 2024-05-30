@@ -1,17 +1,40 @@
-import React from 'react';
-import {View, Text, StyleSheet, Image, Button} from 'react-native';
+import React, {useEffect} from 'react';
+import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
+import NfcManager, {NfcTech} from 'react-native-nfc-manager';
 
-const BugSpreadScreen = ({route, navigation}) => {
-  const {bugImage} = route.params;
+const BugSpread = ({bugImage}) => {
+  useEffect(() => {
+    // Start NFC manager
+    NfcManager.start();
+
+    // Clean up on unmount
+    return () => {
+      NfcManager.stop();
+    };
+  }, []);
+
+  async function readNdef() {
+    try {
+      // Register for the NFC tag with NDEF in it
+      await NfcManager.requestTechnology(NfcTech.Ndef);
+      // The resolved tag object will contain `ndefMessage` property
+      const tag = await NfcManager.getTag();
+      console.warn('Tag found', tag);
+    } catch (ex) {
+      console.warn('Oops!', ex);
+    } finally {
+      // Stop the NFC scanning
+      NfcManager.cancelTechnologyRequest();
+    }
+  }
 
   return (
     <View style={styles.container}>
-      <Text style={styles.spreadText}>Spread Your Bug!</Text>
-      <Image source={bugImage} style={styles.image} />
-      <Button
-        title="Back to Welcome"
-        onPress={() => navigation.navigate('BugOfTheWeek')}
-      />
+      <Text style={styles.welcomeText}>Spread your bug!</Text>
+      {bugImage && <Image source={bugImage} style={styles.image} />}
+      <TouchableOpacity onPress={readNdef}>
+        <Text style={styles.spreadButton}>Scan NFC Tag</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -21,9 +44,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 20,
   },
-  spreadText: {
+  welcomeText: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
@@ -32,7 +54,13 @@ const styles = StyleSheet.create({
     width: 200,
     height: 200,
     resizeMode: 'contain',
+    marginBottom: 20,
+  },
+  spreadButton: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: 'blue',
   },
 });
 
-export default BugSpreadScreen;
+export default BugSpread;

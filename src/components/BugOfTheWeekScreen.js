@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useRef} from 'react';
 import {View, Text, StyleSheet, Button, Image, Animated} from 'react-native';
+import globalStyles from '../styles/globalStyles';
 
-// Import all bug images statically
 const bugImages = [
   require('../../assets/bugs/bug_1.png'),
   require('../../assets/bugs/bug_2.png'),
@@ -15,7 +15,7 @@ const bugImages = [
   require('../../assets/bugs/bug_10.png'),
 ];
 
-const BugAppScreen = ({navigation}) => {
+const BugOfTheWeekScreen = ({navigation}) => {
   const [showBugImage, setShowBugImage] = useState(false);
   const [showBugCount, setShowBugCount] = useState(false);
   const [showButton, setShowButton] = useState(false);
@@ -76,17 +76,17 @@ const BugAppScreen = ({navigation}) => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={globalStyles.container}>
       {welcomeVisible && (
         <Animated.View style={{opacity: fadeAnimWelcome}}>
-          <Text style={styles.welcomeText}>Welcome to Bug :)</Text>
+          <Text style={globalStyles.text}>Welcome to Bug :)</Text>
           <Button title="Show me the bug" onPress={handleShowBug} />
         </Animated.View>
       )}
 
       {bugTextVisible && (
         <Animated.View style={{opacity: fadeAnimBugText}}>
-          <Text style={styles.bugText}>Your Bug of the Week is...</Text>
+          <Text style={globalStyles.text}>Your Bug of the Week is...</Text>
         </Animated.View>
       )}
 
@@ -99,7 +99,7 @@ const BugAppScreen = ({navigation}) => {
 
       {showBugCount && (
         <Animated.View style={{opacity: fadeAnimCount}}>
-          <Text style={styles.count}>Total Bugs Spread: 5</Text>
+          <Text style={globalStyles.text}>Total Bugs Spread: 5</Text>
         </Animated.View>
       )}
 
@@ -149,4 +149,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default BugAppScreen;
+export default BugOfTheWeekScreen;
